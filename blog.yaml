@@ -1,0 +1,12 @@
+title: "@hc"
+base_url: http://home.ustc.edu.cn/~ustczhc/
+hero:
+  header: "@hc :)"
+  content: "心路历程集散地❤️"
+nav:
+  search: "搜索"
+  tags: 标签
+l10n:
+  toc: "目录"
+front-matter-defaults:
+  author: hc
