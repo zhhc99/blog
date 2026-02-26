@@ -7,6 +7,7 @@ summary: Gnome 真的很漂亮啊...
 tags:
   - PC
   - Linux
+ignore: true
 ---
 
 我已经在 Surface Go 上尝试了 Linux, Fedora + Gnome + Wayland 简洁优雅却又存在许多小问题, 非常适合在忙碌的工作后进行体验和探索. 现在我为自己的 SFF PC 装上了 10 月刚刚发布的 Fedora 43. 这是一个非常现代化的 Linux 系统, 但过程中也踩了不少坑.
