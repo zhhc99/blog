@@ -86,7 +86,7 @@ Fedora 完全符合这几点:
    1. Go / Go 2: 开箱即用
    2. Pro 6: 不要重启, 先安装 Linux Surface 内核
 
-![surface-linux-mermaid](surface-linux-mermaid.png "安装流程")
+![安装流程](surface-linux-mermaid.png)
 
 #### 制作启动盘
 

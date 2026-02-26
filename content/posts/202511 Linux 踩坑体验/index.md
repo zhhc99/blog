@@ -51,7 +51,7 @@ Fedora 下的 Nvidia 驱动建议按照 [RPM HowTo: Nvidia](https://rpmfusion.or
 
 mt7922 网卡简直是问题大户. 它在 Windows 下极其稳定, 但在 Linux 下会[跳 ping](https://www.google.com/search?q=mt7922+ping+spike+on+linux), 且有些 Wifi 能搜到但是连不上.
 
-![mt7922-ping-ap](mt7922-ping-ap.png "MT7922 跳 ping.")
+![MT7922 跳 ping](mt7922-ping-ap.png)
 
 - 暂时的解决方案: 用手机的 USB 网络共享.
 - 我也做软件上的尝试. 不管是 [Arch Wiki](https://wiki.archlinux.org/title/Network_configuration/Wireless) 还是其他各种尝试 (cpu 调度, 服务或驱动关闭 powersave, 更新软件包, 限制 WiFi 频段, BIOS 关闭 fTPM, 更换 NetworkManager 后端), 都不能解决问题. 一些讨论见 [cachyos](https://discuss.cachyos.org/t/high-ping-spikes/13151),[frame.work](https://community.frame.work/t/responded-mt7922-poor-performance-fedora-6-7-7-200-fc39-x86-64/46817/3),[arch](https://bbs.archlinux.org/viewtopic.php?id=306521),[reddit](https://www.reddit.com/r/linux4noobs/comments/1l4rc4c/issue_with_latency_on_mt7922_mediatek_wifiadapter/).
@@ -79,7 +79,7 @@ sudo systemctl restart NetworkManager
 
 做完这套操作后 ping spike 瞬间消失 (尽管还是没有 Windows 下那么低).
 
-![ax210+iwd](ax210-ping-ap.png "AX210 + iwd 的使用体验接近 Windows 了.")
+![AX210 + iwd 的使用体验接近 Windows 了.](ax210-ping-ap.png)
 
 ### 挂起和休眠
 

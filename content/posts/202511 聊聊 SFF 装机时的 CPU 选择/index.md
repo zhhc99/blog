@@ -32,7 +32,7 @@ SFF (Small Form Factor) PC 的紧凑设计总能让我爱不释手, 但散热限
 
 当然, 我们也希望装出的 SFF PC 尽可能**安静**而**凉快**, 这对使用环境和硬件健康有好处.
 
-![CPU 的选择因素](what-do-we-want-when-picking-cpu.excalidraw.png "一枚合适的 CPU 能兼顾每个需求.")
+![一枚合适的 CPU 能兼顾每个需求.](what-do-we-want-when-picking-cpu.excalidraw.png)
 
 目前的装机主流是 AMD Ryzen 7000/9000 系和 Intel Core Ultra 200 系, 我们就从它们聊起.
 
@@ -69,7 +69,7 @@ SFF (Small Form Factor) PC 的紧凑设计总能让我爱不释手, 但散热限
 
 > 我们只关注 R23 (多核), 它使用较为通用的计算方法, 所以数据更贴合实际应用. 后面 "2024" 两列更适合作为渲染方面的专用 benchmark.
 
-![最强桌面 CPU](best-cpus-in-cinebench.png "当前最强的两款桌面 CPU")
+![当前最强的两款桌面 CPU](best-cpus-in-cinebench.png)
 
 对于 SFF PC, 任何功耗超过 100W 的 CPU 都可能对散热带来困难. 最终使用时我们会手动限制功耗, 从而降低性能. 一般来说, **限制功耗时, AMD 的性能损失要远少于 Intel**, 尤其是对顶级 CPU 而言.
 
@@ -114,7 +114,7 @@ SFF (Small Form Factor) PC 的紧凑设计总能让我爱不释手, 但散热限
 
 > 可以在 [TechPowerUp](https://www.techpowerup.com/review/amd-ryzen-7-9800x3d/23.html) 看到许多评测, 其中有各种场景下的功耗数据对比 (例如下图是一组多核数据). 他们的评测不依赖软显, 直接通过硬件读取功耗, 结果非常准确.
 
-![功耗对比](multicore-power-by-techpowerup.png "功耗对比. 来自 TechPowerUp")
+![功耗对比. 来自 TechPowerUp](multicore-power-by-techpowerup.png)
 
 ### 性能发挥程度
 
@@ -153,7 +153,7 @@ AMD 的 **X3D** 堆入了更大的缓存, 这使其特别适合**现代游戏场
 - 7900X 相当于两颗 7600X 塞到一起, 且其中有一颗的体质往往较好
 - 7950X 相当于两颗 7700X 塞到一起, 且其中有一颗的体质往往较好
 
-![AMD Zen4 的双 CCD 设计](zen4-dual-ccd.png "AMD Zen4 的双 CCD 设计")
+![AMD Zen4 的双 CCD 设计](zen4-dual-ccd.png)
 
 我们能看到, 7950X 具有 64MB 大三缓, 但它其实是两块 32MB 的三缓, 所以**不会给游戏性能带来额外提升**. 这些 CPU 需要正确安装 AMD 的芯片组驱动, 它们将 8 核以内的负载 (例如常见的游戏) 集中到体质较好的那颗 CCD 上, 这样主频会比 7700X (7600X) 高一点.
 
