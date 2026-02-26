@@ -88,6 +88,7 @@ tags:
 
 - CPU: AMD 7950X -> 9800X3D
 - GPU: Giga RTX 4060 LP
+- 主板: Asus B650E-I
 - 散热器: Axp90x53 + 猫扇 a9x14 + 免卡扣支架
 - 内存条: 芝奇 DDR5 6000MHz CL30 (32GB × 2)
 - 风扇: 利民 8015 × 2
