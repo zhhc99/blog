@@ -22,7 +22,7 @@ tags:
 >
 > 价格: ~600 CNY
 
-![机箱外观. 这个角度恰好露出了显卡的铜质热管...](zs-d2-v4-gallary/final-01.webp)
+![机箱外观.](zs-d2-v4-gallary/final-01.webp)
 
 ![@ZSPC 给出的结构图](zs-d2-v4-gallary/print-01.webp)
 
