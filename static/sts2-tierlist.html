@@ -1,0 +1,1180 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>STS2 Tierlist</title>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+<script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+<style>
+/* Light theme (default) */
+:root {
+  --md-sys-color-primary:#6750A4;
+  --md-sys-color-on-primary:#FFF;
+  --md-sys-color-primary-container:#EADDFF;
+  --md-sys-color-on-primary-container:#21005D;
+  --md-sys-color-secondary:#625B71;
+  --md-sys-color-secondary-container:#E8DEF8;
+  --md-sys-color-surface:#FEF7FF;
+  --md-sys-color-surface-variant:#E7E0EC;
+  --md-sys-color-on-surface:#1C1B1F;
+  --md-sys-color-on-surface-variant:#49454F;
+  --md-sys-color-outline:#79747E;
+  --md-sys-color-outline-variant:#CAC4D0;
+  --md-sys-color-background:#FEF7FF;
+  --md-sys-color-surface-container-low:#F7F2FA;
+  --md-sys-color-surface-container:#F3EDF7;
+  --md-sys-color-surface-container-high:#ECE6F0;
+  --md-sys-color-inverse-surface:#313033;
+  --md-sys-color-inverse-on-surface:#F4EFF4;
+  --md-sys-elevation-1:0 1px 2px rgba(0,0,0,.12),0 1px 3px 1px rgba(0,0,0,.08);
+  --md-sys-elevation-2:0 1px 2px rgba(0,0,0,.12),0 2px 6px 2px rgba(0,0,0,.08);
+  --md-sys-elevation-3:0 4px 8px 3px rgba(0,0,0,.1),0 1px 3px rgba(0,0,0,.08);
+  --md-sys-shape-corner-small:8px;
+  --md-sys-shape-corner-medium:12px;
+  --md-sys-shape-corner-extra-large:28px;
+  --rarity-basic:#6B7280;
+  --rarity-common:#6B7280;
+  --rarity-uncommon:#2563EB;
+  --rarity-rare:#D97706;
+  --rarity-ancient:#7C3AED;
+  --text-gold:#B45309;
+  --text-red:#B91C1C;
+  --text-blue:#1D4ED8;
+  --text-green:#047857;
+  --text-purple:#7C3AED;
+  --text-orange:#C2410C;
+  --upgrade-color:#059669;
+  --star-color:#0EA5E9;
+  font-family:system-ui,-apple-system,sans-serif;
+  color-scheme:light;
+}
+
+/* Dark theme */
+[data-theme="dark"] {
+  --md-sys-color-primary:#D0BCFF;
+  --md-sys-color-on-primary:#381E72;
+  --md-sys-color-primary-container:#4F378B;
+  --md-sys-color-on-primary-container:#EADDFF;
+  --md-sys-color-secondary:#CCC2DC;
+  --md-sys-color-secondary-container:#4A4458;
+  --md-sys-color-surface:#141218;
+  --md-sys-color-surface-variant:#49454F;
+  --md-sys-color-on-surface:#E6E0E9;
+  --md-sys-color-on-surface-variant:#CAC4D0;
+  --md-sys-color-outline:#938F99;
+  --md-sys-color-outline-variant:#49454F;
+  --md-sys-color-background:#141218;
+  --md-sys-color-surface-container-low:#1D1B20;
+  --md-sys-color-surface-container:#211F26;
+  --md-sys-color-surface-container-high:#2B2930;
+  --md-sys-color-inverse-surface:#E6E0E9;
+  --md-sys-color-inverse-on-surface:#313033;
+  --md-sys-elevation-1:0 1px 2px rgba(0,0,0,.24),0 1px 3px 1px rgba(0,0,0,.16);
+  --md-sys-elevation-2:0 1px 2px rgba(0,0,0,.24),0 2px 6px 2px rgba(0,0,0,.16);
+  --md-sys-elevation-3:0 4px 8px 3px rgba(0,0,0,.2),0 1px 3px rgba(0,0,0,.16);
+  --rarity-basic:#9CA3AF;
+  --rarity-common:#9CA3AF;
+  --rarity-uncommon:#60A5FA;
+  --rarity-rare:#FBBF24;
+  --rarity-ancient:#A78BFA;
+  --text-gold:#FBBF24;
+  --text-red:#F87171;
+  --text-blue:#60A5FA;
+  --text-green:#34D399;
+  --text-purple:#A78BFA;
+  --text-orange:#FB923C;
+  --upgrade-color:#34D399;
+  --star-color:#38BDF8;
+  color-scheme:dark;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--md-sys-color-background);color:var(--md-sys-color-on-surface);min-height:100vh;display:flex;flex-direction:column;overflow-x:hidden;transition:background .3s,color .3s}
+.page-wrapper{width:100%;max-width:800px;margin:0 auto;display:flex;flex-direction:column;min-height:100vh}
+.top-app-bar{position:sticky;top:0;z-index:100;background:var(--md-sys-color-surface-container);box-shadow:var(--md-sys-elevation-2);padding:0 16px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;min-height:56px;transition:background .3s}
+.app-title{font-size:1.25rem;font-weight:700;color:var(--md-sys-color-primary);letter-spacing:-0.02em;white-space:nowrap}
+.char-select-wrap{position:relative;display:flex;align-items:center}
+.char-btn{width:36px;height:36px;border-radius:50%;border:none;background:var(--md-sys-color-surface-container-high);color:var(--md-sys-color-on-surface-variant);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s,color .2s;overflow:hidden}
+.char-btn:hover{background:var(--md-sys-color-surface-variant)}
+.char-btn img{width:24px;height:24px;object-fit:contain}
+.char-btn .material-icons-round{font-size:20px}
+.toolbar-right{display:flex;align-items:center;gap:6px;margin-left:auto;flex-shrink:0;flex-wrap:wrap}
+.tonal-btn{display:inline-flex;align-items:center;gap:5px;padding:0 12px 0 10px;height:36px;border-radius:9999px;border:none;background:var(--md-sys-color-secondary-container);color:var(--md-sys-color-secondary);font-family:inherit;font-size:.8rem;font-weight:500;cursor:pointer;white-space:nowrap;transition:background .2s,box-shadow .2s;flex-shrink:0}
+.tonal-btn:hover{box-shadow:var(--md-sys-elevation-1)}
+.tonal-btn .material-icons-round{font-size:16px}
+.icon-btn{width:36px;height:36px;border-radius:50%;border:none;background:var(--md-sys-color-surface-container-high);color:var(--md-sys-color-on-surface-variant);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s,color .2s;position:relative}
+.icon-btn:hover{background:var(--md-sys-color-surface-variant)}
+.icon-btn .material-icons-round{font-size:20px}
+.icon-btn.active{background:var(--md-sys-color-primary-container);color:var(--md-sys-color-primary)}
+/* Dropdown menu */
+.dropdown-menu{position:absolute;top:100%;right:0;margin-top:4px;background:var(--md-sys-color-surface-container);border-radius:var(--md-sys-shape-corner-medium);border:1px solid var(--md-sys-color-outline-variant);box-shadow:var(--md-sys-elevation-3);min-width:140px;z-index:200;opacity:0;visibility:hidden;transform:scale(.95);transform-origin:top right;transition:opacity .15s,transform .15s,visibility .15s}
+.dropdown-menu.open{opacity:1;visibility:visible;transform:scale(1)}
+.dropdown-menu button{width:100%;padding:10px 14px;border:none;background:transparent;color:var(--md-sys-color-on-surface);font-family:inherit;font-size:.85rem;text-align:left;cursor:pointer;display:flex;align-items:center;gap:8px;transition:background .15s}
+.dropdown-menu button:first-child{border-radius:var(--md-sys-shape-corner-medium) var(--md-sys-shape-corner-medium) 0 0}
+.dropdown-menu button:last-child{border-radius:0 0 var(--md-sys-shape-corner-medium) var(--md-sys-shape-corner-medium)}
+.dropdown-menu button:hover{background:var(--md-sys-color-surface-variant)}
+.dropdown-menu button.selected{background:var(--md-sys-color-primary-container);color:var(--md-sys-color-primary)}
+.dropdown-menu button img{width:20px;height:20px;object-fit:contain}
+.lang-menu{right:auto;left:0;transform-origin:top left}
+.main-content{flex:1;padding:16px;display:flex;flex-direction:column;gap:12px;padding-bottom:0}
+.tier-row{display:flex;align-items:stretch;border-radius:var(--md-sys-shape-corner-medium);background:var(--md-sys-color-surface-container-low);border:1px solid var(--md-sys-color-outline-variant);overflow:hidden;min-height:100px;transition:box-shadow .25s ease,border-color .25s ease,opacity .3s ease;position:relative}
+.tier-row:hover{box-shadow:var(--md-sys-elevation-1)}
+.tier-row.drag-over{box-shadow:var(--md-sys-elevation-3);border-color:var(--md-sys-color-primary)}
+.tier-row.dragging{opacity:.4}
+.tier-drag-handle{display:flex;align-items:center;justify-content:center;width:28px;flex-shrink:0;cursor:ns-resize;color:var(--md-sys-color-outline);padding:8px 2px;border-right:1px solid var(--md-sys-color-outline-variant);background:transparent;transition:background .2s,color .2s}
+.tier-drag-handle:hover{background:var(--md-sys-color-surface-container);color:var(--md-sys-color-on-surface-variant)}
+.tier-drag-handle .material-icons-round{font-size:18px}
+.tier-label-wrap{display:flex;align-items:center;justify-content:center;width:64px;flex-shrink:0;background:var(--tier-bg,#888);position:relative}
+.tier-label{font-size:1.35rem;font-weight:700;color:#fff;text-align:center;cursor:text;padding:4px 6px;min-width:28px;border-radius:4px;outline:none;text-shadow:0 1px 3px rgba(0,0,0,.4);transition:background .2s}
+.tier-label:focus{background:rgba(255,255,255,.2)}
+.tier-cards{flex:1;display:flex;flex-wrap:wrap;align-content:flex-start;gap:10px;padding:10px;min-height:76px;padding-top:0.5rem;transition:background .2s}
+.tier-row.drag-over .tier-cards{background:var(--md-sys-color-primary-container);opacity:.3}
+.tier-actions{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;padding:6px 4px;border-left:1px solid var(--md-sys-color-outline-variant);flex-shrink:0}
+.tier-actions .del-btn{width:32px;height:32px}
+.tier-actions .del-btn .material-icons-round{font-size:18px}
+.del-btn{width:36px;height:36px;border-radius:50%;border:none;background:transparent;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--md-sys-color-on-surface-variant);position:relative;overflow:hidden;transition:background .2s}
+.del-btn:hover{background:var(--md-sys-color-surface-variant)}
+.del-btn .material-icons-round{font-size:20px}
+.card-item{width:80px;background:var(--md-sys-color-surface);border-radius:10px;overflow:hidden;border:2.5px solid var(--rarity-color,var(--md-sys-color-outline-variant));cursor:grab;transition:transform .2s ease,opacity .2s ease,box-shadow .2s;user-select:none;-webkit-user-select:none;position:relative}
+.card-item:active{cursor:grabbing}
+.card-item:hover{transform:translateY(-2px);box-shadow:var(--md-sys-elevation-2)}
+.card-item.dragging{opacity:.3;transform:scale(.92)}
+.card-img{width:100%;aspect-ratio:5/4;object-fit:cover;display:block;background:var(--md-sys-color-surface-container)}
+.card-placeholder{width:100%;aspect-ratio:5/4;display:flex;align-items:center;justify-content:center;background:var(--md-sys-color-surface-container-high);color:var(--md-sys-color-outline)}
+.card-placeholder .material-icons-round{font-size:24px}
+.card-name{font-size:.7rem;line-height:1.3;text-align:center;color:var(--rarity-color,var(--md-sys-color-on-surface-variant));padding:4px 2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:600;background:var(--md-sys-color-surface-container-low)}
+.add-tier-btn{display:flex;align-items:center;justify-content:center;gap:6px;width:100%;height:44px;border-radius:var(--md-sys-shape-corner-medium);border:1.5px dashed var(--md-sys-color-outline-variant);background:transparent;color:var(--md-sys-color-on-surface-variant);font-family:inherit;font-size:.8rem;font-weight:500;cursor:pointer;transition:background .2s,border-color .2s,color .2s}
+.add-tier-btn:hover{background:var(--md-sys-color-surface-container);border-color:var(--md-sys-color-primary);color:var(--md-sys-color-primary)}
+.add-tier-btn .material-icons-round{font-size:18px}
+.unclassified-panel{position:sticky;bottom:0;z-index:50;background:var(--md-sys-color-surface-container);border-top:1px solid var(--md-sys-color-outline-variant);box-shadow:0 -2px 8px rgba(0,0,0,.08);display:flex;flex-direction:column;transition:max-height .35s cubic-bezier(.4,0,.2,1);max-height:55vh;overflow:hidden}
+.unclassified-panel.collapsed{max-height:44px}
+.panel-header{display:flex;align-items:center;gap:8px;padding:8px 16px;min-height:44px;flex-shrink:0}
+.panel-header-text{display:flex;align-items:center;gap:8px;cursor:pointer}
+.panel-title{font-size:.875rem;font-weight:500;color:var(--md-sys-color-on-surface)}
+.panel-count{display:inline-flex;align-items:center;justify-content:center;min-width:22px;height:22px;padding:0 6px;border-radius:9999px;background:var(--md-sys-color-primary);color:var(--md-sys-color-on-primary);font-size:.7rem;font-weight:600}
+.panel-chevron{color:var(--md-sys-color-on-surface-variant);transition:transform .3s ease}
+.unclassified-panel:not(.collapsed) .panel-chevron{transform:rotate(180deg)}
+.search-field{display:flex;align-items:center;gap:6px;background:var(--md-sys-color-surface-container-high);border-radius:var(--md-sys-shape-corner-extra-large);padding:0 12px 0 10px;height:32px;margin-left:auto;flex:0 1 200px;transition:opacity .2s}
+.unclassified-panel.collapsed .search-field{opacity:0;pointer-events:none}
+.search-field .material-icons-round{color:var(--md-sys-color-on-surface-variant);font-size:18px}
+.search-field input{flex:1;border:none;background:transparent;font-family:inherit;font-size:.85rem;color:var(--md-sys-color-on-surface);outline:none;min-width:0}
+.search-field input::placeholder{color:var(--md-sys-color-on-surface-variant)}
+.panel-cards{overflow-y:auto;padding:4px 16px 16px;display:flex;flex-wrap:wrap;gap:10px;align-content:flex-start}
+.panel-cards::-webkit-scrollbar{width:6px}
+.panel-cards::-webkit-scrollbar-track{background:transparent}
+.panel-cards::-webkit-scrollbar-thumb{background:var(--md-sys-color-outline-variant);border-radius:3px}
+::-webkit-scrollbar{width:6px;height:6px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--md-sys-color-outline-variant);border-radius:3px}
+.bigcard-tooltip{position:fixed;z-index:1000;pointer-events:none;opacity:0;transition:opacity .15s ease;max-width:280px}
+.bigcard-tooltip.visible{opacity:1}
+.bigcard-inner{display:flex;flex-direction:column;border-radius:12px;border:3px solid var(--rarity-color,var(--md-sys-color-outline-variant));background:var(--md-sys-color-surface);box-shadow:var(--md-sys-elevation-3);overflow:hidden}
+.bigcard-header{display:flex;align-items:center;gap:8px;padding:6px 10px;background:var(--rarity-bg,rgba(107,114,128,.15));border-bottom:1px solid var(--md-sys-color-outline-variant);position:relative}
+.bigcard-cost{display:flex;align-items:center;justify-content:center;min-width:24px;height:24px;border-radius:50%;font-size:.85rem;font-weight:700;color:#fff;flex-shrink:0;padding:0 4px}
+.bigcard-star{display:flex;align-items:center;justify-content:center;min-width:24px;height:24px;border-radius:50%;font-size:.85rem;font-weight:700;color:#fff;background:var(--star-color);flex-shrink:0;padding:0 4px;margin-left:4px}
+.bigcard-name{font-size:.9rem;font-weight:600;color:var(--md-sys-color-on-surface);flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.bigcard-name.upgraded{color:var(--upgrade-color)}
+.bigcard-shift-hint{display:flex;align-items:center;gap:1px;font-size:.65rem;color:var(--upgrade-color);opacity:.9;flex-shrink:0;cursor:pointer;pointer-events:auto}
+.bigcard-shift-hint:hover{opacity:1}
+.bigcard-shift-hint .material-icons-round{font-size:12px}
+.bigcard-img-wrap{width:100%;aspect-ratio:500/380;overflow:hidden}
+.bigcard-img-wrap img{width:100%;height:100%;object-fit:cover}
+.bigcard-desc{padding:10px;font-size:.8rem;line-height:1.5;color:var(--md-sys-color-on-surface);white-space:pre-wrap}
+.bigcard-desc .gold{color:var(--text-gold);font-weight:600}
+.bigcard-desc .red{color:var(--text-red);font-weight:600}
+.bigcard-desc .blue{color:var(--text-blue);font-weight:600}
+.bigcard-desc .green{color:var(--text-green);font-weight:600}
+.bigcard-desc .purple{color:var(--text-purple);font-weight:600}
+.bigcard-desc .orange{color:var(--text-orange);font-weight:600}
+.snackbar{position:fixed;bottom:70px;left:50%;transform:translateX(-50%);background:var(--md-sys-color-inverse-surface);color:var(--md-sys-color-inverse-on-surface);padding:10px 20px;border-radius:var(--md-sys-shape-corner-small);font-size:.8rem;font-weight:500;box-shadow:var(--md-sys-elevation-3);z-index:200;opacity:0;transition:opacity .2s;pointer-events:none}
+.snackbar.show{opacity:1}
+.loading-overlay{position:fixed;inset:0;background:var(--md-sys-color-background);display:flex;align-items:center;justify-content:center;z-index:1000;flex-direction:column;gap:16px;transition:opacity .3s}
+.loading-overlay.hidden{opacity:0;pointer-events:none}
+.loading-spinner{width:48px;height:48px;border:4px solid var(--md-sys-color-outline-variant);border-top-color:var(--md-sys-color-primary);border-radius:50%;animation:spin 1s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+@media(max-width:600px){.top-app-bar{padding:0 12px;gap:8px;min-height:52px}.app-title{font-size:1.1rem}.tonal-btn span:not(.material-icons-round){display:none}.tonal-btn{padding:0 10px;height:34px;min-width:36px}.main-content{padding:12px 12px 0;gap:10px}.tier-label-wrap{width:52px}.tier-label{font-size:1.2rem}.card-item{width:64px}.card-name{font-size:.65rem}.unclassified-panel{max-height:50vh}.unclassified-panel.collapsed{max-height:44px}.bigcard-tooltip{max-width:240px}.search-field{flex:0 1 140px;height:28px}}
+</style>
+</head>
+<body>
+<div class="page-wrapper">
+<div class="loading-overlay" id="loadingOverlay"><div class="loading-spinner"></div><span id="loadingText"></span></div>
+<header class="top-app-bar">
+  <span class="app-title" id="appTitle"></span>
+  <div class="char-select-wrap">
+    <button class="char-btn" id="charBtn" title="选择角色"><span class="material-icons-round">person</span></button>
+    <div class="dropdown-menu" id="charMenu"></div>
+  </div>
+  <div class="toolbar-right">
+    <button class="tonal-btn" id="importBtn" title=""><span class="material-icons-round">upload_file</span><span id="importText"></span></button>
+    <button class="tonal-btn" id="exportBtn" title=""><span class="material-icons-round">download</span><span id="exportText"></span></button>
+    <button class="tonal-btn" id="exportImgBtn" title=""><span class="material-icons-round">image</span><span id="exportImgText"></span></button>
+    <div class="char-select-wrap">
+      <button class="icon-btn" id="langBtn" title="选择语言"><span class="material-icons-round">language</span></button>
+      <div class="dropdown-menu lang-menu" id="langMenu"></div>
+    </div>
+    <button class="icon-btn" id="themeBtn" title="切换主题"><span class="material-icons-round">dark_mode</span></button>
+  </div>
+</header>
+<main class="main-content" id="tierList"><button class="add-tier-btn" id="addTierBtn"><span class="material-icons-round">add</span><span id="addTierText"></span></button><div style="height:8px"></div></main>
+<section class="unclassified-panel collapsed" id="uncPanel">
+  <div class="panel-header" id="panelHeader">
+    <div class="panel-header-text">
+      <span class="material-icons-round" style="color:var(--md-sys-color-on-surface-variant);font-size:18px">style</span>
+      <span class="panel-title" id="panelTitle"></span>
+      <span class="panel-count" id="uncCount">0</span>
+    </div>
+    <div class="search-field">
+      <span class="material-icons-round">search</span>
+      <input type="text" id="searchInput">
+    </div>
+    <span class="material-icons-round panel-chevron">expand_less</span>
+  </div>
+  <div class="panel-cards" id="uncCards"></div>
+</section>
+</div>
+<div class="bigcard-tooltip" id="bigcardTooltip"><div class="bigcard-inner" id="bigcardInner"></div></div>
+<div class="snackbar" id="snackbar"></div>
+<input type="file" id="fileInput" accept=".json" style="display:none">
+<script>
+(function(){
+  var API = "https://spire-codex.com/api";
+  var CARD_IMG = "https://spire-codex.com/static/images/cards";
+  var STORE_KEY = "sts2-tierlist-v6";
+  
+  var I18N = {
+    zhs: {title:"杀戮尖塔2 卡牌评级",unclassified:"未分类卡牌",search:"搜索卡牌...",import:"导入",export:"导出",exportImg:"制图",addTier:"添加 Tier",deleteTier:"删除",tierAdded:"已添加新 Tier",tierDeleted:"已删除 Tier",exported:"已导出",imported:"导入成功",importFailed:"导入失败",exportFailed:"导出失败",loadFailed:"加载失败",cardLoadFailed:"加载卡牌失败",generating:"正在生成图片...",imageExported:"图片已导出",noContent:"没有可导出的内容",langSwitched:"语言已切换",charLoading:"加载角色数据...",cardLoading:"加载卡牌数据...",invalidFormat:"无效的文件格式",shift:"Shift"},
+    eng: {title:"STS2 Tierlist",unclassified:"Unclassified Cards",search:"Search cards...",import:"Import",export:"Export",exportImg:"Image",addTier:"Add Tier",deleteTier:"Delete",tierAdded:"Tier added",tierDeleted:"Tier deleted",exported:"Exported",imported:"Import successful",importFailed:"Import failed",exportFailed:"Export failed",loadFailed:"Load failed",cardLoadFailed:"Failed to load cards",generating:"Generating image...",imageExported:"Image exported",noContent:"No content to export",langSwitched:"Language changed",charLoading:"Loading characters...",cardLoading:"Loading cards...",invalidFormat:"Invalid file format",shift:"Shift"}
+  };
+  
+  var LANGS = [{code:"zhs",name:"简体中文"},{code:"eng",name:"English"},{code:"jpn",name:"日本語"},{code:"kor",name:"한국어"},{code:"deu",name:"Deutsch"},{code:"fra",name:"Français"},{code:"esp",name:"Español"},{code:"ita",name:"Italiano"},{code:"ptb",name:"Português"},{code:"rus",name:"Русский"},{code:"tur",name:"Türkçe"},{code:"tha",name:"ไทย"},{code:"pol",name:"Polski"},{code:"spa",name:"Español LA"}];
+  var CHARS = [{id:"ironclad"},{id:"silent"},{id:"defect"},{id:"necrobinder"},{id:"regent"}];
+  var TIER_PALETTE = ["#E06C6C","#D87A5F","#C78B52","#AD9A4F","#87A55A","#5490B0","#4F7CA3","#4A6F96"];
+  var TIER_LABELS = ["S","A","B","C","D","E","F","F-"];
+  var RARITY_COLORS = {Basic:"var(--rarity-basic)",Common:"var(--rarity-common)",Uncommon:"var(--rarity-uncommon)",Rare:"var(--rarity-rare)",Ancient:"var(--rarity-ancient)"};
+  var RARITY_BGS = {Basic:"rgba(107,114,128,.15)",Common:"rgba(107,114,128,.15)",Uncommon:"rgba(37,99,235,.12)",Rare:"rgba(217,119,6,.12)",Ancient:"rgba(124,58,237,.12)"};
+  var CHAR_COLORS = {ironclad:"#B91C1C",silent:"#047857",defect:"#1D4ED8",necrobinder:"#7C3AED",regent:"#C2410C"};
+  
+  var state = {lang:"zhs",charId:"ironclad",chars:{},relics:{},cards:{},tierlists:{},loadedChars:new Set(),theme:"auto"};
+  var showUpgraded = false;
+  var currentTooltipCard = null;
+  var openDropdown = null;
+  
+  function t(key) { var lang = state.lang === "zhs" ? "zhs" : "eng"; return I18N[lang][key] || I18N["eng"][key] || key; }
+  function $(id) { return document.getElementById(id); }
+  
+  function showSnack(msg) {
+    var s = $("snackbar");
+    s.textContent = msg;
+    s.classList.add("show");
+    clearTimeout(s._t);
+    s._t = setTimeout(function() { s.classList.remove("show"); }, 2500);
+  }
+  
+  function escapeHtml(str) { return str.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#39;"); }
+  
+  function getEnergyOrb(charId) {
+    var color = CHAR_COLORS[charId] || "#6750A4";
+    return '<span style="color:' + color + '">●</span>';
+  }
+  
+  function cleanDescription(text) {
+    return text.replace(/\[(?!\/?(gold|red|blue|green|purple|orange|energy|star)\b)[^\]]+\]/gi, '');
+  }
+  
+  function renderRichText(text, charId) {
+    charId = charId || state.charId;
+    text = cleanDescription(text);
+    // Parse energy [energy:N]
+    text = text.replace(/\[energy:(\d+)\]/g, function(m, n) {
+      var num = parseInt(n);
+      if (num >= 4) return num + getEnergyOrb(charId);
+      var orbs = '';
+      for (var i = 0; i < num; i++) orbs += getEnergyOrb(charId);
+      return orbs;
+    });
+    // Parse star (辉星 for Regent) [star:N]
+    text = text.replace(/\[star:(\d+)\]/g, function(m, n) {
+      var num = parseInt(n);
+      if (num >= 4) return num + '🔷';
+      var stars = '';
+      for (var i = 0; i < num; i++) stars += '🔷';
+      return stars;
+    });
+    return text
+      .replace(/\[gold\](.*?)\[\/gold\]/g,'<span class="gold">$1</span>')
+      .replace(/\[red\](.*?)\[\/red\]/g,'<span class="red">$1</span>')
+      .replace(/\[blue\](.*?)\[\/blue\]/g,'<span class="blue">$1</span>')
+      .replace(/\[green\](.*?)\[\/green\]/g,'<span class="green">$1</span>')
+      .replace(/\[purple\](.*?)\[\/purple\]/g,'<span class="purple">$1</span>')
+      .replace(/\[orange\](.*?)\[\/orange\]/g,'<span class="orange">$1</span>');
+  }
+  
+  function saveState() { 
+    try { 
+      var data = {lang:state.lang,charId:state.charId,tierlists:state.tierlists,theme:state.theme}; 
+      localStorage.setItem(STORE_KEY,JSON.stringify(data)); 
+    } catch(e) {} 
+  }
+  
+  function loadState() {
+    try {
+      var saved = localStorage.getItem(STORE_KEY);
+      if (saved) {
+        var data = JSON.parse(saved);
+        if (data.lang) state.lang = data.lang;
+        if (data.charId) state.charId = data.charId;
+        if (data.tierlists) state.tierlists = data.tierlists;
+        if (data.theme) state.theme = data.theme;
+        Object.keys(state.tierlists).forEach(function(id) {
+          if (state.tierlists[id].tiers) state.tierlists[id].tiers.forEach(function(tier) { delete tier.color; });
+        });
+      }
+    } catch(e) {}
+  }
+  
+  function applyTheme() {
+    var isDark = state.theme === "dark" || (state.theme === "auto" && window.matchMedia("(prefers-color-scheme: dark)").matches);
+    document.documentElement.setAttribute("data-theme", isDark ? "dark" : "light");
+    var btn = $("themeBtn");
+    if (btn) btn.querySelector(".material-icons-round").textContent = isDark ? "light_mode" : "dark_mode";
+  }
+  
+  function toggleTheme() {
+    if (state.theme === "auto") {
+      var isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+      state.theme = isDark ? "light" : "dark";
+    } else if (state.theme === "dark") {
+      state.theme = "light";
+    } else {
+      state.theme = "dark";
+    }
+    applyTheme();
+    saveState();
+  }
+  
+  function closeDropdowns() {
+    document.querySelectorAll(".dropdown-menu").forEach(function(m) { m.classList.remove("open"); });
+    openDropdown = null;
+  }
+  
+  function toggleDropdown(menuId, btnId) {
+    var menu = $(menuId);
+    var isOpen = menu.classList.contains("open");
+    closeDropdowns();
+    if (!isOpen) {
+      menu.classList.add("open");
+      openDropdown = menuId;
+    }
+  }
+  
+  async function fetchAPI(endpoint, params) {
+    params = params || {};
+    var url = new URL(API + endpoint);
+    Object.keys(params).forEach(function(k) { if (params[k]) url.searchParams.set(k, params[k]); });
+    var res = await fetch(url);
+    if (!res.ok) throw new Error("API Error: " + res.status);
+    return res.json();
+  }
+  
+  // Convert PascalCase to snake_case for API calls
+  function toSnakeCase(str) {
+    return str.replace(/([a-z])([A-Z])/g, '$1_$2').toLowerCase();
+  }
+
+  async function loadRelicImage(charId) {
+    if (state.relics[charId]) return state.relics[charId];
+    try {
+      var charData = await fetchAPI("/characters/" + charId, {lang:state.lang});
+      if (charData.starting_relics && charData.starting_relics.length > 0) {
+        // API returns ID like "BoundPhylactery", need snake_case for relic endpoint
+        var relicId = toSnakeCase(charData.starting_relics[0]);
+        var relicData = await fetchAPI("/relics/" + relicId);
+        if (relicData.image_url) {
+          state.relics[charId] = "https://spire-codex.com" + relicData.image_url;
+          return state.relics[charId];
+        }
+      }
+    } catch(e) {}
+    return null;
+  }
+  
+  function formatUpgradeDesc(card, isUpgraded) {
+    var desc = card.description || "";
+    var upgrade = card.upgrade;
+    var vars = card.vars || {};
+    if (!isUpgraded || !upgrade) return desc;
+    Object.keys(vars).forEach(function(key) {
+      var baseVal = vars[key];
+      var upKey = key.toLowerCase();
+      if (upgrade[upKey] || upgrade.damage || upgrade.block) {
+        var newVal = baseVal;
+        if (upgrade[upKey]) {
+          if (typeof upgrade[upKey] === 'string' && upgrade[upKey].startsWith('+')) {
+            newVal = baseVal + parseInt(upgrade[upKey].substring(1));
+          } else if (typeof upgrade[upKey] === 'number') {
+            newVal = upgrade[upKey];
+          }
+        } else if (key === 'Damage' && upgrade.damage) {
+          if (typeof upgrade.damage === 'string' && upgrade.damage.startsWith('+')) {
+            newVal = baseVal + parseInt(upgrade.damage.substring(1));
+          } else if (typeof upgrade.damage === 'number') {
+            newVal = upgrade.damage;
+          }
+        } else if (key === 'Block' && upgrade.block) {
+          if (typeof upgrade.block === 'string' && upgrade.block.startsWith('+')) {
+            newVal = baseVal + parseInt(upgrade.block.substring(1));
+          } else if (typeof upgrade.block === 'number') {
+            newVal = upgrade.block;
+          }
+        }
+        if (newVal !== baseVal) desc = desc.replace(new RegExp('\\b' + baseVal + '\\b', 'g'), newVal);
+      }
+    });
+    if (upgrade.add_innate) desc = '[green]Innate.[/green]\n' + desc;
+    if (upgrade.add_ethereal) desc = '[purple]Ethereal.[/purple]\n' + desc;
+    if (upgrade.add_exhaust) desc = desc + '\n[purple]Exhaust.[/purple]';
+    return desc;
+  }
+  
+  function getUpgradedCost(card) {
+    if (!card.upgrade) return card.cost;
+    if (card.upgrade.cost !== undefined) return card.upgrade.cost;
+    if (card.upgrade.cost_minus_1) return Math.max(0, card.cost - 1);
+    if (card.upgrade.cost_minus_2) return Math.max(0, card.cost - 2);
+    return card.cost;
+  }
+  
+  function positionTooltip(x, y) {
+    var tooltip = $("bigcardTooltip");
+    var W = window.innerWidth, H = window.innerHeight, tw = 280, th = 350;
+    var px = x + 15, py = y + 15;
+    if (px + tw > W - 20) px = x - tw - 15;
+    if (py + th > H - 20) py = y - th - 15;
+    if (px < 10) px = 10;
+    if (py < 10) py = 10;
+    tooltip.style.left = px + "px";
+    tooltip.style.top = py + "px";
+  }
+
+  function showBigcard(card, x, y) {
+    if (!card) return;
+    var tooltip = $("bigcardTooltip");
+    var inner = $("bigcardInner");
+    var rarityKey = card.rarity_key || "Common";
+    var rarityColor = RARITY_COLORS[rarityKey] || RARITY_COLORS["Common"];
+    var rarityBg = RARITY_BGS[rarityKey] || RARITY_BGS["Common"];
+    var charColor = CHAR_COLORS[state.charId] || "#6750A4";
+
+    var cost = showUpgraded ? getUpgradedCost(card) : card.cost;
+    var costText = card.is_x_cost ? "X" : (cost !== null && cost !== undefined ? String(cost) : "-");
+    var starCost = card.star_cost || 0;
+    var imgSrc = CARD_IMG + "/" + card.id.toLowerCase() + ".png";
+    var desc = formatUpgradeDesc(card, showUpgraded);
+
+    inner.style.setProperty("--rarity-color", rarityColor);
+    inner.style.setProperty("--rarity-bg", rarityBg);
+
+    var nameClass = showUpgraded ? 'bigcard-name upgraded' : 'bigcard-name';
+    var plusSign = showUpgraded ? '+' : '';
+    var shiftHint = '<span class="bigcard-shift-hint">⬆' + t('shift') + '</span>';
+
+    // Build cost display with optional star cost
+    var costDisplay = '<div class="bigcard-cost" style="background:' + charColor + '">' + costText + '</div>';
+    if (starCost > 0) {
+      costDisplay += '<div class="bigcard-star">' + starCost + '</div>';
+    }
+
+    inner.innerHTML = '<div class="bigcard-header">' + costDisplay + '<div class="' + nameClass + '">' + escapeHtml(card.name) + plusSign + '</div>' + shiftHint + '</div><div class="bigcard-img-wrap"><img src="' + imgSrc + '" alt="' + escapeHtml(card.name) + '" onerror="this.style.display=\'none\'"></div><div class="bigcard-desc">' + renderRichText(escapeHtml(desc), state.charId) + '</div>';
+
+    tooltip.classList.add("visible");
+    positionTooltip(x, y);
+    currentTooltipCard = card;
+  }
+  
+  function hideBigcard() {
+    $("bigcardTooltip").classList.remove("visible");
+    currentTooltipCard = null;
+  }
+
+  function updateTooltipForShift() {
+    if (currentTooltipCard) {
+      var tooltip = $("bigcardTooltip");
+      var rect = tooltip.getBoundingClientRect();
+      showBigcard(currentTooltipCard, rect.left - 15, rect.top - 15);
+    }
+  }
+
+  document.addEventListener("keydown", function(e) {
+    if (e.key === "Shift" && !showUpgraded) { showUpgraded = true; updateTooltipForShift(); }
+    else if (e.key === "Tab" && !e.target.closest("[contenteditable]") && !e.target.matches("input,textarea")) {
+      e.preventDefault();
+      $("uncPanel").classList.remove("collapsed");
+      $("searchInput").focus();
+    }
+  });
+  document.addEventListener("keyup", function(e) {
+    if (e.key === "Shift" && showUpgraded) { showUpgraded = false; updateTooltipForShift(); }
+  });
+  
+  function setupTouchDrag(div, card) {
+    var touchStartX = 0, touchStartY = 0, isDragging = false, touchClone = null;
+    var origWidth = 0, origHeight = 0;
+
+    div.addEventListener("touchstart", function(e) {
+      if (e.touches.length === 1) {
+        touchStartX = e.touches[0].clientX;
+        touchStartY = e.touches[0].clientY;
+        origWidth = div.offsetWidth;
+        origHeight = div.offsetHeight;
+        isDragging = false;
+      }
+    }, {passive: true});
+
+    div.addEventListener("touchmove", function(e) {
+      if (e.touches.length !== 1) return;
+      var touch = e.touches[0];
+      var dx = Math.abs(touch.clientX - touchStartX);
+      var dy = Math.abs(touch.clientY - touchStartY);
+
+      if (dx > 10 || dy > 10) {
+        if (e.cancelable) e.preventDefault();
+
+        if (!isDragging) {
+          isDragging = true;
+          div.classList.add("dragging");
+          touchClone = div.cloneNode(true);
+          touchClone.style.cssText = "position:fixed;z-index:1000;pointer-events:none;opacity:0.9;transform:scale(1.05);width:" + origWidth + "px;height:" + origHeight + "px";
+          document.body.appendChild(touchClone);
+        }
+
+        if (touchClone) {
+          touchClone.style.left = (touch.clientX - origWidth / 2) + "px";
+          touchClone.style.top = (touch.clientY - origHeight / 2) + "px";
+        }
+
+        if (touchClone) touchClone.style.display = "none";
+        var elBelow = document.elementFromPoint(touch.clientX, touch.clientY);
+        if (touchClone) touchClone.style.display = "";
+
+        var tierRow = elBelow ? elBelow.closest(".tier-row") : null;
+        document.querySelectorAll(".tier-row").forEach(function(r) { r.classList.remove("drag-over"); });
+        if (tierRow) tierRow.classList.add("drag-over");
+      }
+    }, {passive: false});
+
+    div.addEventListener("touchend", function(e) {
+      var touch = e.changedTouches[0];
+
+      if (isDragging) {
+        if (touchClone) { document.body.removeChild(touchClone); touchClone = null; }
+
+        var elBelow = document.elementFromPoint(touch.clientX, touch.clientY);
+        var dropZone = elBelow ? elBelow.closest(".tier-cards, .panel-cards") : null;
+
+        if (!dropZone) {
+          var tierRow = elBelow ? elBelow.closest(".tier-row") : null;
+          if (tierRow) dropZone = tierRow.querySelector(".tier-cards");
+        }
+
+        if (!dropZone && elBelow && elBelow.closest("#uncPanel")) dropZone = $("uncCards");
+
+        if (dropZone) {
+          var cardId = card.id;
+          var fromTier = div.closest(".tier-cards") ? parseInt(div.closest(".tier-cards").dataset.tierIdx) : null;
+          var toTier = dropZone.classList.contains("tier-cards") ? parseInt(dropZone.dataset.tierIdx) : null;
+
+          moveCard(cardId, fromTier, toTier);
+
+          if (dropZone.classList.contains("panel-cards") || dropZone.id === "uncCards") {
+            if (div.parentNode) div.parentNode.removeChild(div);
+            renderUncCards($("searchInput").value);
+          } else {
+            dropZone.appendChild(div);
+            updateUncCount();
+          }
+        }
+
+        document.querySelectorAll(".tier-row").forEach(function(r) { r.classList.remove("drag-over"); });
+      }
+
+      div.classList.remove("dragging");
+      isDragging = false;
+    });
+  }
+
+  function createCardEl(card) {
+    var div = document.createElement("div");
+    div.className = "card-item";
+    div.draggable = true;
+    div.dataset.id = card.id;
+    
+    var rarityKey = card.rarity_key || "Common";
+    var rarityColor = RARITY_COLORS[rarityKey] || RARITY_COLORS["Common"];
+    var imgSrc = CARD_IMG + "/" + card.id.toLowerCase() + ".png";
+    var safeName = escapeHtml(card.name);
+    
+    div.style.setProperty("--rarity-color", rarityColor);
+    
+    var img = document.createElement("img");
+    img.className = "card-img";
+    img.src = imgSrc;
+    img.alt = safeName;
+    img.loading = "lazy";
+    img.onerror = function() {
+      var placeholder = document.createElement("div");
+      placeholder.className = "card-placeholder";
+      placeholder.innerHTML = '<span class="material-icons-round">style</span>';
+      img.replaceWith(placeholder);
+    };
+    div.appendChild(img);
+    
+    var nameSpan = document.createElement("div");
+    nameSpan.className = "card-name";
+    nameSpan.textContent = card.name.length > 16 ? card.name.slice(0, 14) + "…" : card.name;
+    div.appendChild(nameSpan);
+    
+    // Mouse events
+    div.addEventListener("mouseenter", function(e) {
+      var cardData = state.cards[state.charId] ? state.cards[state.charId].find(function(c) { return c.id === card.id; }) : null;
+      if (cardData) showBigcard(cardData, e.clientX, e.clientY);
+    });
+    div.addEventListener("mousemove", function(e) { if (currentTooltipCard) positionTooltip(e.clientX, e.clientY); });
+    div.addEventListener("mouseleave", function() { hideBigcard(); });
+    
+    // Desktop drag
+    div.addEventListener("dragstart", function(e) {
+      div.classList.add("dragging");
+      e.dataTransfer.effectAllowed = "move";
+      e.dataTransfer.setData("text/plain", card.id);
+    });
+    div.addEventListener("dragend", function() {
+      div.classList.remove("dragging");
+      document.querySelectorAll(".tier-row").forEach(function(r) { r.classList.remove("drag-over"); });
+    });
+    
+    setupTouchDrag(div, card);
+    return div;
+  }
+  
+  function ensureTierList(id) {
+    if (!state.tierlists[id]) {
+      state.tierlists[id] = {tiers: TIER_LABELS.slice(0,5).map(function(label,i) { return {label:label,cards:[]}; })};
+    }
+  }
+  
+  function getTierColor(idx) { return TIER_PALETTE[idx % TIER_PALETTE.length]; }
+  function getDefaultTierLabel(idx) { return TIER_LABELS[idx % TIER_LABELS.length]; }
+  
+  function updateUI() {
+    $("appTitle").textContent = t("title");
+    $("panelTitle").textContent = t("unclassified");
+    $("searchInput").placeholder = t("search");
+    $("importText").textContent = t("import");
+    $("exportText").textContent = t("export");
+    $("exportImgText").textContent = t("exportImg");
+    $("addTierText").textContent = t("addTier");
+  }
+  
+  function renderLangMenu() {
+    var menu = $("langMenu");
+    menu.innerHTML = "";
+    LANGS.forEach(function(l) {
+      var btn = document.createElement("button");
+      btn.textContent = l.name;
+      if (l.code === state.lang) btn.className = "selected";
+      btn.onclick = function(e) {
+        e.stopPropagation();
+        changeLang(l.code);
+        closeDropdowns();
+      };
+      menu.appendChild(btn);
+    });
+  }
+  
+  function renderCharMenu() {
+    var menu = $("charMenu");
+    menu.innerHTML = "";
+
+    CHARS.forEach(function(ch) {
+      var btn = document.createElement("button");
+
+      var imgUrl = state.relics[ch.id];
+      var charName = state.chars[ch.id] || ch.id;
+
+      if (imgUrl) {
+        btn.innerHTML = '<img src="' + imgUrl + '" alt="' + charName + '"><span>' + charName + '</span>';
+      } else {
+        btn.innerHTML = '<span class="material-icons-round" style="font-size:20px">hourglass_empty</span><span>' + charName + '</span>';
+        // Load relic image async
+        (function(id) {
+          loadRelicImage(id).then(function(url) {
+            if (url) {
+              var b = menu.querySelector('[data-char="' + id + '"]');
+              if (b) {
+                var charNameLocal = state.chars[id] || id;
+                b.innerHTML = '<img src="' + url + '" alt="' + charNameLocal + '"><span>' + charNameLocal + '</span>';
+              }
+            }
+          });
+        })(ch.id);
+      }
+
+      btn.dataset.char = ch.id;
+      btn.title = charName;
+      if (ch.id === state.charId) btn.className = "selected";
+      btn.onclick = (function(id) {
+        return function(e) {
+          e.stopPropagation();
+          selectChar(id);
+          closeDropdowns();
+        };
+      })(ch.id);
+      menu.appendChild(btn);
+    });
+  }
+  
+  async function updateCharBtn() {
+    var btn = $("charBtn");
+    var imgUrl = state.relics[state.charId];
+    if (imgUrl) {
+      btn.innerHTML = '<img src="' + imgUrl + '" alt="' + (state.chars[state.charId] || state.charId) + '">';
+    } else {
+      var url = await loadRelicImage(state.charId);
+      if (url) {
+        btn.innerHTML = '<img src="' + url + '" alt="' + (state.chars[state.charId] || state.charId) + '">';
+      }
+    }
+  }
+  
+  function renderTierList() {
+    var c = $("tierList");
+    var add = $("addTierBtn");
+    c.querySelectorAll(".tier-row").forEach(function(r) { r.remove(); });
+    ensureTierList(state.charId);
+    var tl = state.tierlists[state.charId];
+    tl.tiers.forEach(function(tier, idx) {
+      var row = document.createElement("div");
+      row.className = "tier-row";
+      row.draggable = true;
+      row.dataset.idx = idx;
+      var color = getTierColor(idx);
+      row.innerHTML = '<div class="tier-drag-handle" data-handle="true"><span class="material-icons-round">drag_indicator</span></div><div class="tier-label-wrap" style="--tier-bg:' + color + '"><div class="tier-label" contenteditable spellcheck="false">' + escapeHtml(tier.label) + '</div></div><div class="tier-cards" data-tier-idx="' + idx + '"></div><div class="tier-actions"><button class="del-btn" title="' + t("deleteTier") + '"><span class="material-icons-round">delete_outline</span></button></div>';
+      var cc = row.querySelector(".tier-cards");
+      tier.cards.forEach(function(cid) {
+        var card = state.cards[state.charId] ? state.cards[state.charId].find(function(cr) { return cr.id === cid; }) : null;
+        if (card) cc.appendChild(createCardEl(card));
+      });
+      row.querySelector(".del-btn").onclick = function() { removeTier(idx); };
+      c.insertBefore(row, add);
+    });
+    setupTierDrag();
+  }
+  
+  // Type priority: Attack > Skill > Power
+  var TYPE_PRIORITY = {Attack: 1, Skill: 2, Power: 3};
+
+  function renderUncCards(filter) {
+    filter = filter || "";
+    var c = $("uncCards");
+    c.innerHTML = "";
+    ensureTierList(state.charId);
+    var tl = state.tierlists[state.charId];
+    var classified = new Set(tl.tiers.flatMap(function(t) { return t.cards; }));
+    var cards = state.cards[state.charId] || [];
+    var unclassified = cards.filter(function(cr) { return !classified.has(cr.id) && (filter === "" || cr.name.toLowerCase().includes(filter.toLowerCase())); });
+
+    // Sort: cost, star_cost, type (Attack > Skill > Power), name
+    unclassified.sort(function(a, b) {
+      var costA = a.is_x_cost ? 99 : (a.cost != null ? a.cost : 999);
+      var costB = b.is_x_cost ? 99 : (b.cost != null ? b.cost : 999);
+      if (costA !== costB) return costA - costB;
+
+      var starA = a.star_cost || 0;
+      var starB = b.star_cost || 0;
+      if (starA !== starB) return starA - starB;
+
+      var typeA = TYPE_PRIORITY[a.type] || 99;
+      var typeB = TYPE_PRIORITY[b.type] || 99;
+      if (typeA !== typeB) return typeA - typeB;
+
+      return (a.name || "").localeCompare(b.name || "");
+    });
+
+    unclassified.forEach(function(cr) { c.appendChild(createCardEl(cr)); });
+    updateUncCount();
+  }
+  
+  function updateUncCount() {
+    ensureTierList(state.charId);
+    var tl = state.tierlists[state.charId];
+    var classified = new Set(tl.tiers.flatMap(function(t) { return t.cards; }));
+    var cards = state.cards[state.charId] || [];
+    $("uncCount").textContent = cards.length - classified.size;
+  }
+  
+  async function selectChar(id) {
+    if (state.charId === id) return;
+    state.charId = id;
+    if (!state.loadedChars.has(id)) await loadCharCards(id);
+    await updateCharBtn();
+    renderCharMenu();
+    renderTierList();
+    renderUncCards();
+    saveState();
+  }
+  
+  async function changeLang(lang) {
+    state.lang = lang;
+    state.loadedChars.clear();
+    // Reload relic images for new language
+    state.relics = {};
+    await loadAllData();
+    renderCharMenu();
+    await updateCharBtn();
+    renderTierList();
+    renderUncCards();
+    updateUI();
+    saveState();
+    showSnack(t("langSwitched"));
+  }
+  
+  async function loadCharCards(charId) {
+    try {
+      $("loadingText").textContent = t("cardLoading") + " " + (state.chars[charId] || charId) + "...";
+      $("loadingOverlay").classList.remove("hidden");
+      var cards = await fetchAPI("/cards", {color:charId.toLowerCase(), lang:state.lang});
+      state.cards[charId] = cards;
+      state.loadedChars.add(charId);
+      $("loadingOverlay").classList.add("hidden");
+    } catch(err) {
+      $("loadingOverlay").classList.add("hidden");
+      showSnack(t("cardLoadFailed") + ": " + err.message);
+    }
+  }
+  
+  function addTier() {
+    ensureTierList(state.charId);
+    var tl = state.tierlists[state.charId];
+    var idx = tl.tiers.length;
+    tl.tiers.push({label:getDefaultTierLabel(idx), cards:[]});
+    renderTierList();
+    saveState();
+    showSnack(t("tierAdded"));
+  }
+  
+  function removeTier(idx) {
+    ensureTierList(state.charId);
+    var tl = state.tierlists[state.charId];
+    tl.tiers.splice(idx, 1);
+    renderTierList();
+    renderUncCards();
+    saveState();
+    showSnack(t("tierDeleted"));
+  }
+  
+  function moveCard(cardId, fromTierIdx, toTierIdx) {
+    ensureTierList(state.charId);
+    var tl = state.tierlists[state.charId];
+    if (fromTierIdx !== null && fromTierIdx >= 0 && tl.tiers[fromTierIdx]) {
+      var idx = tl.tiers[fromTierIdx].cards.indexOf(cardId);
+      if (idx > -1) tl.tiers[fromTierIdx].cards.splice(idx, 1);
+    }
+    if (toTierIdx !== null && toTierIdx >= 0 && tl.tiers[toTierIdx]) {
+      if (!tl.tiers[toTierIdx].cards.includes(cardId)) tl.tiers[toTierIdx].cards.push(cardId);
+    }
+    saveState();
+  }
+  
+  function updateTierOrder() {
+    ensureTierList(state.charId);
+    var tl = state.tierlists[state.charId];
+    var rows = document.querySelectorAll(".tier-row");
+    var newTiers = [];
+    rows.forEach(function(row, i) {
+      var oldIdx = parseInt(row.dataset.idx);
+      var tier = tl.tiers[oldIdx] || {label:getDefaultTierLabel(i), cards:[]};
+      tier.label = row.querySelector(".tier-label").textContent.trim() || tier.label;
+      newTiers.push(tier);
+    });
+    tl.tiers = newTiers;
+    saveState();
+  }
+  
+  // FLIP animation
+  function flipAnimate(rows) {
+    var before = [];
+    rows.forEach(function(r) { before.push({ el: r, top: r.getBoundingClientRect().top }); });
+    return function() {
+      before.forEach(function(item) {
+        var newTop = item.el.getBoundingClientRect().top;
+        var dy = item.top - newTop;
+        if (Math.abs(dy) < 1) return;
+        item.el.style.transition = 'none';
+        item.el.style.transform = 'translateY(' + dy + 'px)';
+        requestAnimationFrame(function() {
+          item.el.style.transition = 'transform .22s cubic-bezier(.4,0,.2,1)';
+          item.el.style.transform = '';
+          var el = item.el;
+          el.addEventListener('transitionend', function handler() {
+            el.style.transform = '';
+            el.style.transition = '';
+            el.removeEventListener('transitionend', handler);
+          });
+        });
+      });
+    };
+  }
+  
+  var dragTier = null;
+  
+  function setupTierDrag() {
+    document.querySelectorAll(".tier-row").forEach(function(row) {
+      var handle = row.querySelector(".tier-drag-handle");
+      
+      var touchY0 = 0, tDragging = false, tClone = null, tTarget = null;
+
+      handle.addEventListener("touchstart", function(e) {
+        if (e.touches.length !== 1) return;
+        touchY0 = e.touches[0].clientY;
+        tDragging = false;
+        dragTier = row;
+      }, {passive: true});
+
+      handle.addEventListener("touchmove", function(e) {
+        if (dragTier !== row || e.touches.length !== 1) return;
+        if (e.cancelable) e.preventDefault();
+        var touch = e.touches[0];
+        if (!tDragging && Math.abs(touch.clientY - touchY0) > 8) {
+          tDragging = true;
+          row.style.opacity = "0.4";
+          tClone = row.cloneNode(true);
+          tClone.style.cssText = "position:fixed;z-index:1000;pointer-events:none;opacity:.9;width:" + row.offsetWidth + "px;left:" + row.getBoundingClientRect().left + "px;box-shadow:0 8px 24px rgba(0,0,0,.2)";
+          document.body.appendChild(tClone);
+        }
+        if (!tDragging) return;
+        tClone.style.top = (touch.clientY - row.offsetHeight / 2) + "px";
+        tTarget = null;
+        document.querySelectorAll(".tier-row").forEach(function(r) {
+          if (r === row || tTarget) return;
+          var rect = r.getBoundingClientRect();
+          if (touch.clientY < rect.top + rect.height / 2) tTarget = r;
+        });
+      }, {passive: false});
+
+      handle.addEventListener("touchend", function() {
+        if (tClone) { document.body.removeChild(tClone); tClone = null; }
+        if (tDragging) {
+          row.style.opacity = "";
+          $("tierList").insertBefore(row, tTarget || $("addTierBtn"));
+          updateTierOrder();
+          renderTierList();
+        }
+        tDragging = false;
+        dragTier = null;
+        tTarget = null;
+      });
+      
+      // Desktop drag for tier rows
+      row.ondragstart = function(e) {
+        if (!e.target.closest(".tier-drag-handle")) {
+          if (e.target.closest(".card-item")) return;
+          e.stopPropagation();
+        }
+        dragTier = row;
+        row.classList.add("dragging");
+        e.dataTransfer.effectAllowed = "move";
+      };
+      
+      row.ondragend = function() {
+        row.classList.remove("dragging");
+        if (dragTier) { updateTierOrder(); dragTier = null; renderTierList(); }
+      };
+      
+      row.ondragover = function(e) {
+        if (!dragTier || !dragTier.classList.contains("tier-row")) return;
+        e.preventDefault();
+        
+        var allRows = Array.from(document.querySelectorAll(".tier-row"));
+        var animate = flipAnimate(allRows);
+        
+        var rect = row.getBoundingClientRect();
+        var mid = rect.top + rect.height / 2;
+        var c = $("tierList");
+        var add = $("addTierBtn");
+        if (e.clientY < mid) c.insertBefore(dragTier, row);
+        else c.insertBefore(dragTier, row.nextElementSibling === add ? add : row.nextElementSibling);
+        
+        animate();
+      };
+      
+      var label = row.querySelector(".tier-label");
+      label.onblur = function() {
+        var idx = parseInt(row.dataset.idx);
+        var newLabel = label.textContent.trim();
+        if (newLabel) { ensureTierList(state.charId); state.tierlists[state.charId].tiers[idx].label = newLabel; saveState(); }
+      };
+    });
+    
+    // Card drop zones
+    document.querySelectorAll(".tier-cards").forEach(function(zone) {
+      zone.ondragover = function(e) { e.preventDefault(); zone.closest(".tier-row").classList.add("drag-over"); };
+      zone.ondragleave = function(e) { if (!zone.contains(e.relatedTarget)) zone.closest(".tier-row").classList.remove("drag-over"); };
+      zone.ondrop = function(e) {
+        e.preventDefault();
+        zone.closest(".tier-row").classList.remove("drag-over");
+        var cardId = e.dataTransfer.getData("text/plain");
+        var cardEl = document.querySelector('.card-item[data-id="' + cardId + '"]');
+        if (cardEl) {
+          var fromTier = cardEl.closest(".tier-cards") ? parseInt(cardEl.closest(".tier-cards").dataset.tierIdx) : null;
+          moveCard(cardId, fromTier, parseInt(zone.dataset.tierIdx));
+          zone.appendChild(cardEl);
+          updateUncCount();
+        }
+      };
+    });
+
+    var unc = $("uncCards");
+    unc.ondragover = function(e) { e.preventDefault(); };
+    unc.ondrop = function(e) {
+      e.preventDefault();
+      var cardId = e.dataTransfer.getData("text/plain");
+      var cardEl = document.querySelector('.card-item[data-id="' + cardId + '"]');
+      if (cardEl) {
+        var fromTier = cardEl.closest(".tier-cards") ? parseInt(cardEl.closest(".tier-cards").dataset.tierIdx) : null;
+        moveCard(cardId, fromTier, null);
+        // Remove old element before re-rendering
+        if (cardEl.parentNode) cardEl.parentNode.removeChild(cardEl);
+        // Re-render with current search filter to maintain sorting
+        renderUncCards($("searchInput").value);
+      }
+    };
+  }
+  
+  function exportJSON() {
+    ensureTierList(state.charId);
+    var tl = state.tierlists[state.charId];
+    var charName = state.chars[state.charId] || state.charId;
+    var data = {character:charName,characterId:state.charId,language:state.lang,tiers:tl.tiers.map(function(t){return{label:t.label,cards:t.cards.map(function(id){var c=state.cards[state.charId]?state.cards[state.charId].find(function(x){return x.id===id}):null;return c?{id:c.id,name:c.name,rarity_key:c.rarity_key}:null}).filter(Boolean)}}),exportedAt:new Date().toISOString()};
+    var blob = new Blob([JSON.stringify(data,null,2)],{type:"application/json"});
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement("a");
+    a.href = url;
+    a.download = charName + ".json";
+    a.click();
+    URL.revokeObjectURL(url);
+    showSnack(t("exported") + " " + charName + ".json");
+  }
+  
+  function importJSON(e) {
+    var file = e.target.files[0];
+    if (!file) return;
+    var reader = new FileReader();
+    reader.onload = function(ev) {
+      try {
+        var data = JSON.parse(ev.target.result);
+        if (!data.tiers || !Array.isArray(data.tiers)) throw new Error(t("invalidFormat"));
+        var targetCharId = data.characterId || state.charId;
+        state.tierlists[targetCharId] = {tiers:data.tiers.map(function(t){return{label:t.label||"?",cards:(t.cards||[]).map(function(c){return typeof c==="string"?c:c.id})}})};
+        if (targetCharId === state.charId) { renderTierList(); renderUncCards(); }
+        saveState();
+        showSnack(t("imported"));
+      } catch(err) { showSnack(t("importFailed") + ": " + err.message); }
+    };
+    reader.readAsText(file);
+    e.target.value = "";
+  }
+  
+  async function exportImage() {
+    showSnack(t("generating"));
+    var tierRows = document.querySelectorAll(".tier-row");
+    if (tierRows.length === 0) { showSnack(t("noContent")); return; }
+    var container = document.createElement("div");
+    container.style.cssText = "background:var(--md-sys-color-background);padding:16px;display:flex;flex-direction:column;gap:12px;font-family:system-ui;";
+    tierRows.forEach(function(row, idx) {
+      var clone = row.cloneNode(true);
+      var handle = clone.querySelector(".tier-drag-handle");
+      var actions = clone.querySelector(".tier-actions");
+      if (handle) handle.remove();
+      if (actions) actions.remove();
+      var labelWrap = clone.querySelector(".tier-label-wrap");
+      if (labelWrap) labelWrap.style.width = "56px";
+      var color = getTierColor(idx);
+      if (labelWrap) labelWrap.style.setProperty("--tier-bg", color);
+      container.appendChild(clone);
+    });
+    document.body.appendChild(container);
+    try {
+      var canvas = await html2canvas(container, {backgroundColor:getComputedStyle(document.documentElement).getPropertyValue("--md-sys-color-background").trim(), scale:2, useCORS:true});
+      var url = canvas.toDataURL("image/png");
+      var a = document.createElement("a");
+      a.href = url;
+      a.download = (state.chars[state.charId] || state.charId) + "-tierlist.png";
+      a.click();
+      showSnack(t("imageExported"));
+    } catch(err) { showSnack(t("exportFailed") + ": " + err.message); }
+    finally { document.body.removeChild(container); }
+  }
+  
+  async function loadAllData() {
+    try {
+      $("loadingOverlay").classList.remove("hidden");
+      $("loadingText").textContent = t("charLoading");
+      var chars = await fetchAPI("/characters", {lang:state.lang});
+      // Store with lowercase key to match our CHARS array
+      chars.forEach(function(c) {
+        state.chars[c.id.toLowerCase()] = c.name;
+      });
+      // Pre-load relic images for all characters
+      await Promise.all(CHARS.map(function(c) { return loadRelicImage(c.id); }));
+      $("loadingText").textContent = t("cardLoading");
+      await loadCharCards(state.charId);
+      $("loadingOverlay").classList.add("hidden");
+    } catch(err) {
+      $("loadingOverlay").classList.add("hidden");
+      showSnack(t("loadFailed") + ": " + err.message);
+    }
+  }
+  
+  async function init() {
+    loadState();
+    applyTheme();
+    
+    window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", function() {
+      if (state.theme === "auto") applyTheme();
+    });
+    
+    // Close dropdowns when clicking outside
+    document.addEventListener("click", function(e) {
+      if (!e.target.closest(".dropdown-menu") && !e.target.closest(".icon-btn") && !e.target.closest(".char-btn")) {
+        closeDropdowns();
+      }
+    });
+    
+    renderLangMenu();
+    
+    $("langBtn").onclick = function(e) { e.stopPropagation(); toggleDropdown("langMenu", "langBtn"); };
+    $("charBtn").onclick = function(e) { e.stopPropagation(); toggleDropdown("charMenu", "charBtn"); };
+    $("themeBtn").onclick = toggleTheme;
+    $("addTierBtn").onclick = addTier;
+    $("exportBtn").onclick = exportJSON;
+    $("importBtn").onclick = function() { $("fileInput").click(); };
+    $("fileInput").onchange = importJSON;
+    $("exportImgBtn").onclick = exportImage;
+    $("panelHeader").onclick = function(e) { if (!e.target.closest(".search-field")) $("uncPanel").classList.toggle("collapsed"); };
+    $("searchInput").oninput = function(e) { renderUncCards(e.target.value); };
+    
+    await loadAllData();
+    renderCharMenu();
+    await updateCharBtn();
+    renderTierList();
+    renderUncCards();
+    updateUI();
+    $("uncPanel").classList.remove("collapsed");
+  }
+  
+  init();
+})();
+</script>
+</body>
+</html>
