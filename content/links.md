@@ -40,7 +40,7 @@ Dota2 是兼具趣味和深度的游戏, 如同十人版的手谈⚫️⚪️.
 | **Project Torchlight**       | 《火炬之光 2》图鉴与辅助工具 | [点此查看](http://home.ustc.edu.cn/~ustczhc/projects/project-torchlight/tl.html)                            |
 | **Inopedia4**                | Inotia4 图鉴和百科           | [点此查看](http://home.ustc.edu.cn/~ustczhc/projects/inopedia4/)                                            |
 | **Magic Tower Remake**       | 网页版魔塔重制 (H5)          | [点此游玩](http://home.ustc.edu.cn/~ustczhc/projects/magic-tower-remake-h5-1.2/Magic%20Tower%20Remake.html) |
-| **杀戮尖塔2 Tierlist Maker** | AI 的造物                    | [点此进入](http://home.ustc.edu.cn/~ustczhc/sts2-tierlist.html)                                             |
+| **杀戮尖塔2 Tierlist Maker** | 创造性 AI                    | [点此进入](http://home.ustc.edu.cn/~ustczhc/sts2-tierlist.html)                                             |
 
 ---
 
